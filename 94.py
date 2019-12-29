@@ -7,6 +7,23 @@ class TreeNode:
 
 class Solution:
     def maxDepth(self, root: TreeNode) -> int:
-        if root ==None:
+        ##recursive solution
+        #if root ==None:
+            #return 0
+        #return 1+max(self.maxDepth(root.left),self.maxDepth(root.right))
+        
+        #iterative solution when append the root to stack,we update depth+1
+        if root==None:
             return 0
-        return 1+max(self.maxDepth(root.left),self.maxDepth(root.right))
+        max_depth=0
+        stack=[]
+        stack.append((root,1))
+        while stack: 
+            root,depth = stack.pop()
+            if depth>max_depth:
+                max_depth=depth
+            if root.left:
+                stack.append((root.left,depth+1))
+            if root.right:
+                stack.append((root.right,depth+1))
+        return max_depth
